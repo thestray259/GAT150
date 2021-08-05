@@ -5,41 +5,22 @@
 
 int main(int, char**)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-	{
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return 1;
-	}
+	nc::Engine engine; 
+	engine.Startup(); 
 
-	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
-
-	SDL_Window* window = SDL_CreateWindow("GAT150", 100, 100, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-	if (window == nullptr)
-	{
-		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
-		SDL_Quit();
-		return 1;
-	}
-
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0); 
+	engine.Get<nc::Renderer>()->Create("GAT150", 800, 600); 
 
 	std::cout << nc::GetFilePath() << std::endl;
 	nc::SetFilePath("../Resources");
 	std::cout << nc::GetFilePath() << std::endl;
 
-	// load surface 
-	SDL_Surface* surface = SDL_LoadBMP("sf2.bmp");
-
-	// create texture 
-	SDL_Surface* image = IMG_Load("sf2.png"); 
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
+	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>()); 
 
 	bool quit = false; 
 	SDL_Event event; 
 	while (!quit)
 	{
-		SDL_WaitEvent(&event); 
+		SDL_PollEvent(&event); 
 		switch (event.type)
 		{
 		case SDL_QUIT: 
@@ -47,8 +28,25 @@ int main(int, char**)
 			break; 
 		}
 
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderPresent(renderer); 
+		engine.Get<nc::Renderer>()->BeginFrame(); 
+
+		nc::Vector2 position{ 300, 400 }; 
+/*		for (size_t i = 0; i < 50; i++)
+		{
+			nc::Vector2 position{ nc::RandomRangeInt(0, 800), nc::RandomRangeInt(0, 600) }; 
+			engine.Get<nc::Renderer>()->Draw(texture, position); 
+		} */       
+		//nc::Vector2 position{ nc::RandomRangeInt(0, 800), nc::RandomRangeInt(0, 600) }; 
+		engine.Get<nc::Renderer>()->Draw(texture, position); 
+
+		engine.Get<nc::Renderer>()->EndFrame(); 
+
+		//for (size_t i = 0; i < 50; i++)
+		//{
+		//	SDL_Rect src{ 32, 64, 32, 64 }; 
+		//	SDL_Rect dest{ nc::RandomRangeInt(0, screen.x), nc::RandomRangeInt(0, screen.y), 16, 24}; 
+		//	SDL_RenderCopy(renderer, texture, &src, &dest); 
+		//}
 	}
 
 	IMG_Quit();

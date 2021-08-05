@@ -15,6 +15,8 @@
 #include "Math/Random.h"
 
 // graphics
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
 
 // framework
 #include "Framework/EventSystem.h"
