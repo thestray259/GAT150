@@ -1,5 +1,6 @@
 #include "InputSystem.h"
-#include <SDL.h>
+//#include <SDL.h>
+#include <iostream>
 
 namespace nc
 {
@@ -8,7 +9,7 @@ namespace nc
 		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(&numKeys);
 		keyboardState.resize(numKeys); 
 
-		std::copy(keyboardStateSDL, keyboardStateSDL, keyboardState.begin()); 
+		std::copy(keyboardStateSDL, keyboardStateSDL + numKeys, keyboardState.begin()); 
 		prevKeyboardState = keyboardState;
 	}
 
@@ -22,7 +23,7 @@ namespace nc
 		prevKeyboardState = keyboardState;
 
 		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(nullptr); 
-		std::copy(keyboardStateSDL, keyboardStateSDL, keyboardState.begin());
+		std::copy(keyboardStateSDL, keyboardStateSDL + numKeys, keyboardState.begin());
 	}
 
 	nc::InputSystem::eKeyState InputSystem::GetKeyState(int id)
@@ -33,11 +34,11 @@ namespace nc
 
 		if (keyDown) 
 		{
-			state = (prevKeyDown) ? eKeyState::Pressed : eKeyState::Held;
+			state = (prevKeyDown) ? eKeyState::Held : eKeyState::Pressed;
 		}
 		else 
 		{ 
-			state = (prevKeyDown) ? eKeyState::Held : eKeyState::Release;
+			state = (prevKeyDown) ? eKeyState::Release : eKeyState::Idle;
 		}
 
 		return state;

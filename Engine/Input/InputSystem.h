@@ -1,7 +1,7 @@
 #pragma once
 #include "Framework/System.h"
 #include <vector>
-#include <SDL_stdinc.h>
+#include <SDL.h>
 
 namespace nc
 {
