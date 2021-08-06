@@ -4,6 +4,7 @@
 
 // core 
 #include "Core/FileSystem.h"
+#include "Core/Timer.h"
 
 // math
 #include "Math/Vector2.h"
@@ -43,11 +44,14 @@ namespace nc
 		void Startup(); 
 		void Shutdown(); 
 
-		void Update(float dt);
+		void Update();
 		void Draw(); 
 
 		template<typename T>
 		T* Get(); 
+
+	public: 
+		FrameTimer time; 
 
 	private:
 		std::vector<std::unique_ptr<System>> systems; 

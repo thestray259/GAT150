@@ -7,7 +7,6 @@ int main(int, char**)
 {
 	nc::Engine engine; 
 	engine.Startup(); 
-
 	engine.Get<nc::Renderer>()->Create("GAT150", 800, 600); 
 
 	nc::Scene scene; 
@@ -26,6 +25,8 @@ int main(int, char**)
 
 	bool quit = false; 
 	SDL_Event event; 
+	float quitTime = engine.time.time + 3.0f; 
+
 	while (!quit)
 	{
 		SDL_PollEvent(&event); 
@@ -36,25 +37,18 @@ int main(int, char**)
 			break; 
 		}
 
-		engine.Update(0); 
-		scene.Update(0); 
+		// update
+		engine.Update(); 
+		scene.Update(engine.time.deltaTime); 
 		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 
+		if (engine.time.time >= quitTime) quit = true; 
+		engine.time.timeScale = 0.1f; 
+
+		// draw 
 		engine.Get<nc::Renderer>()->BeginFrame(); 
-
 		scene.Draw(engine.Get<nc::Renderer>());
-		//nc::Vector2 position{ 300, 400 }; 
-		//engine.Get<nc::Renderer>()->Draw(texture, position);
-
 		engine.Get<nc::Renderer>()->EndFrame(); 
-
-		//for (size_t i = 0; i < 50; i++)
-		//{
-		//	SDL_Rect src{ 32, 64, 32, 64 }; 
-		//	SDL_Rect dest{ nc::RandomRangeInt(0, screen.x), nc::RandomRangeInt(0, screen.y), 16, 24}; 
-		//	SDL_RenderCopy(renderer, texture, &src, &dest); 
-		//}
-
 	}
 
 	IMG_Quit();
