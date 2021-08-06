@@ -6,6 +6,7 @@ namespace nc
 	{
 		systems.push_back(std::make_unique<EventSystem>());
 		systems.push_back(std::make_unique<ResourceSystem>());
+		systems.push_back(std::make_unique<InputSystem>());
 		systems.push_back(std::make_unique<Renderer>());
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) { system->Startup(); });

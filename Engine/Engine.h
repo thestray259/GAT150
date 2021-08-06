@@ -18,6 +18,9 @@
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 
+// input 
+#include "Input/InputSystem.h"
+
 // framework
 #include "Framework/EventSystem.h"
 

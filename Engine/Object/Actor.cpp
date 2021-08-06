@@ -1,17 +1,20 @@
 #include "Actor.h"
+#include "Graphics/Renderer.h"
 #include <algorithm>
 
 namespace nc
 {
 	void Actor::Update(float dt)
 	{
+		transform.rotation += 0.1; 
+
 		transform.Update(); 
 		std::for_each(children.begin(), children.end(), [](auto& child) { child->transform.Update( child->parent->transform.matrix ); });
 	}
 
-	void Actor::Draw()
+	void Actor::Draw(Renderer* renderer)
 	{
-		
+		renderer->Draw(texture, transform);
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor)
@@ -22,6 +25,6 @@ namespace nc
 
 	float Actor::GetRadius()
 	{
-		return 0.0f; 
+		return (std::max(texture->GetSize().x, texture->GetSize().y) * 0.5f); 
 	}
 }
