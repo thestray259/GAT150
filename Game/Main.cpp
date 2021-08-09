@@ -15,6 +15,8 @@ int main(int, char**)
 	nc::SetFilePath("../Resources");
 
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> particle01 = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine.Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> particle02 = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle02.png", engine.Get<nc::Renderer>());
 
 	for (size_t i = 0; i < 10; i++)
 	{
@@ -40,14 +42,29 @@ int main(int, char**)
 		// update
 		engine.Update(); 
 		scene.Update(engine.time.deltaTime); 
-		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 
-		if (engine.time.time >= quitTime) quit = true; 
-		engine.time.timeScale = 0.1f; 
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
+		{
+			quit = true; 
+		}
+
+		if (engine.Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
+		{
+			nc::Vector2 position = engine.Get<nc::InputSystem>()->GetMousePosition(); 
+			//nc::ParticleSystem::Create(position, 50, 0.5f, particle01, 100.0f, 30.0f, 5.0f);
+			scene.engine->Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, particle01, 50.0f, nc::DegToRad(45), 10.0f); 
+			//std::cout << position.x << " " << position.y << std::endl; 
+		}
+
+		//if (engine.time.time >= quitTime) quit = true; 
+		//engine.time.timeScale = 0.1f; 
 
 		// draw 
 		engine.Get<nc::Renderer>()->BeginFrame(); 
+
 		scene.Draw(engine.Get<nc::Renderer>());
+		engine.Draw(engine.Get<nc::Renderer>());;
+
 		engine.Get<nc::Renderer>()->EndFrame(); 
 	}
 

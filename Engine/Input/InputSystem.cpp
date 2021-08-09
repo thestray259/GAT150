@@ -1,5 +1,4 @@
 #include "InputSystem.h"
-//#include <SDL.h>
 #include <iostream>
 
 namespace nc
@@ -24,6 +23,14 @@ namespace nc
 
 		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(nullptr); 
 		std::copy(keyboardStateSDL, keyboardStateSDL + numKeys, keyboardState.begin());
+
+		prevMouseButtonState = mouseButtonState; 
+		int x, y; 
+		Uint32 buttons = SDL_GetMouseState(&x, &y);
+		mousePosition = nc::Vector2{ x, y }; 
+		mouseButtonState[0] = buttons & SDL_BUTTON_LMASK; 
+		mouseButtonState[1] = buttons & SDL_BUTTON_MMASK; 
+		mouseButtonState[2] = buttons & SDL_BUTTON_RMASK; 
 	}
 
 	nc::InputSystem::eKeyState InputSystem::GetKeyState(int id)
@@ -54,5 +61,23 @@ namespace nc
 	{
 		//return <previous keyboard state at index[id]>;
 		return prevKeyboardState[id];
+	}
+
+	nc::InputSystem::eKeyState InputSystem::GetButtonState(int id)
+	{
+		eKeyState state = eKeyState::Idle;
+		bool keyDown = IsButtonDown(id);
+		bool prevKeyDown = IsPreviousButtonDown(id);
+
+		if (keyDown)
+		{
+			state = (prevKeyDown) ? eKeyState::Held : eKeyState::Pressed;
+		}
+		else
+		{
+			state = (prevKeyDown) ? eKeyState::Release : eKeyState::Idle;
+		}
+
+		return state;
 	}
 }
