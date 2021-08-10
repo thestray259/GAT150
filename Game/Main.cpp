@@ -14,6 +14,10 @@ int main(int, char**)
 
 	nc::SetFilePath("../Resources");
 
+	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav"); 
+	engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/gameMusic.mp3"); 
+	nc::AudioChannel channel = engine.Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true); 
+
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
 	std::shared_ptr<nc::Texture> particle01 = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine.Get<nc::Renderer>());
 	std::shared_ptr<nc::Texture> particle02 = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle02.png", engine.Get<nc::Renderer>());
@@ -52,8 +56,9 @@ int main(int, char**)
 		{
 			nc::Vector2 position = engine.Get<nc::InputSystem>()->GetMousePosition(); 
 			//nc::ParticleSystem::Create(position, 50, 0.5f, particle01, 100.0f, 30.0f, 5.0f);
-			scene.engine->Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, particle01, 50.0f, nc::DegToRad(45), 10.0f); 
-			//std::cout << position.x << " " << position.y << std::endl; 
+			engine.Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine.Get<nc::Renderer>()), 50.0f, nc::DegToRad(45), 10.0f);
+			engine.Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));	
+			channel.SetPitch(nc::RandomRange(0.2f, 2.0f)); 
 		}
 
 		//if (engine.time.time >= quitTime) quit = true; 

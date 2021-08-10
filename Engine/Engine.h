@@ -33,6 +33,10 @@
 #include "Object/Actor.h"
 #include "Object/Scene.h"
 
+// audio 
+#include "Audio/AudioSystem.h" 
+#include "Audio/AudioChannel.h" 
+
 #include <vector>
 #include <memory>
 #include <algorithm>
