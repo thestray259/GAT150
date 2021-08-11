@@ -3,6 +3,7 @@
 // systems 
 
 // core 
+#include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 
@@ -19,6 +20,7 @@
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 #include "Graphics/ParticleSystem.h"
+#include "Graphics/Font.h"
 
 // input 
 #include "Input/InputSystem.h"

@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_Image.h>
 #include <iostream>
+#include <cassert>
 
 int main(int, char**)
 {
@@ -29,6 +30,19 @@ int main(int, char**)
 		scene.AddActor(std::move(actor)); 
 	}
 
+	// get font from resource system
+	int size = 16;
+	std::shared_ptr<nc::Font> font = engine.Get<nc::ResourceSystem>()->Get<nc::Font>("Fonts/Techtro.ttf", &size); 
+
+	// create font texture
+	std::shared_ptr<nc::Texture> textTexture = std::make_shared<nc::Texture>(engine.Get<nc::Renderer>());
+
+	// set font texture with font surface
+	textTexture->Create(font->CreateSurface("hello world", nc::Color{ 1, 1, 1 }));
+
+	// add font texture to resource system
+	engine.Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
+
 	bool quit = false; 
 	SDL_Event event; 
 	float quitTime = engine.time.time + 3.0f; 
@@ -44,6 +58,7 @@ int main(int, char**)
 		}
 
 		// update
+
 		engine.Update(); 
 		scene.Update(engine.time.deltaTime); 
 
@@ -55,8 +70,7 @@ int main(int, char**)
 		if (engine.Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
 		{
 			nc::Vector2 position = engine.Get<nc::InputSystem>()->GetMousePosition(); 
-			//nc::ParticleSystem::Create(position, 50, 0.5f, particle01, 100.0f, 30.0f, 5.0f);
-			engine.Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine.Get<nc::Renderer>()), 50.0f, nc::DegToRad(45), 10.0f);
+			engine.Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, particle01, 50.0f, nc::DegToRad(45), 10.0f);
 			engine.Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));	
 			channel.SetPitch(nc::RandomRange(0.2f, 2.0f)); 
 		}
@@ -69,6 +83,10 @@ int main(int, char**)
 
 		scene.Draw(engine.Get<nc::Renderer>());
 		engine.Draw(engine.Get<nc::Renderer>());;
+
+		nc::Transform t;
+		t.position = { 30, 30 };
+		engine.Get<nc::Renderer>()->Draw(textTexture, t);
 
 		engine.Get<nc::Renderer>()->EndFrame(); 
 	}
