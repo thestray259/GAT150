@@ -65,20 +65,20 @@ void Game::Update()
 	switch (state)
 	{
 	case Game::eState::Title:
-		if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
+		if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
 		{
 			state = eState::StartGame; 
 		}
-	//	if (Core::Input::IsPressed(VK_CONTROL))
-	//	{
-	//		state = eState::Controls;
-	//	}
+		if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_TAB) == nc::InputSystem::eKeyState::Pressed)
+		{
+			state = eState::Controls;
+		}
 		break;
 	case Game::eState::Controls:
-	//	if (Core::Input::IsPressed(VK_CONTROL))
-	//	{
-	//		state = eState::Title; 
-	//	}
+		if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_TAB) == nc::InputSystem::eKeyState::Pressed)
+		{
+			state = eState::Title; 
+		}
 		break; 
 	case Game::eState::StartGame:
 		score = 0; 
@@ -165,7 +165,7 @@ void Game::Draw()
 		//graphics.DrawString(340, 360, "Press Space To Start");
 
 		//graphics.SetColor(nc::Color::cyan);
-		//graphics.DrawString(320, 380, "Press Control For Controls");
+		//graphics.DrawString(320, 380, "Press Tab For Controls");
 		break;
 	case Game::eState::Controls:
 		//graphics.SetColor(nc::Color::orange);
@@ -173,10 +173,10 @@ void Game::Draw()
 		//graphics.DrawString(371, 270, "A = Left Turn");
 		//graphics.DrawString(368, 290, "D = Right Turn");
 		//graphics.DrawString(355, 330, "Spacebar = Weapon 1");
-		//graphics.DrawString(360, 350, "Control = Weapon 2");
+		//graphics.DrawString(360, 350, "Tab = Weapon 2");
 
 		//graphics.SetColor(nc::Color::cyan);
-		//graphics.DrawString(340, 380, "Press Control To Return");
+		//graphics.DrawString(340, 380, "Press Tab To Return");
 		break; 
 	case Game::eState::StartGame:
 		break;
