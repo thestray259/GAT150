@@ -34,20 +34,19 @@ void Player::Update(float dt)
 {
 	Actor::Update(dt); 
 
-	children[3]->transform.localRotation += 5 * dt; 
+	//children[3]->transform.localRotation += 5 * dt; 
 
 	// movement
 	float thrust = 0;
-	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Pressed) transform.rotation -= 5 * dt;
-	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Pressed) transform.rotation += 5 * dt;
-	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Pressed) thrust = speed;
+	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held) transform.rotation -= 5 * dt;
+	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held) transform.rotation += 5 * dt;
+	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Held) thrust = speed;
 
 	// acceleration
 	nc::Vector2 acceleration; 
 	acceleration = nc::Vector2::Rotate(nc::Vector2::right, transform.rotation) * thrust;
-	//nc::Vector2 gravity = (nc::Vector2{ 400, 300 } - transform.position).Normalized() * 50; 
-	nc::Vector2 gravity = nc::Vector2::down * 50; 
-	acceleration += gravity; 
+	//nc::Vector2 gravity = nc::Vector2::down * 50; 
+	//acceleration += gravity; 
 	
 	velocity += acceleration * dt; 
 	transform.position += velocity * dt; 
@@ -104,8 +103,8 @@ void Player::Update(float dt)
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("playershoot");
 	}
 
-	std::vector<nc::Color> colors = { nc::Color::white, nc::Color::purple, nc::Color::red, nc::Color::blue }; 
-	//scene->engine->Get<nc::ParticleSystem>()->Create(children[0]->transform.position, 3, 2, colors, 50, children[0]->transform.rotation, nc::DegToRad(45)); 
+	std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); 
+	scene->engine->Get<nc::ParticleSystem>()->Create(children[0]->transform.position, 3, 2, particle, 50, children[0]->transform.rotation, nc::DegToRad(45)); 
 }
 
 void Player::OnCollision(Actor* actor)

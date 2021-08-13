@@ -5,7 +5,6 @@
 class Player : public nc::Actor
 {
 public:
-	//Player(const nc::Transform transform, std::shared_ptr<nc::Shape> shape, float speed); 
 	Player(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed);
 
 	void Initialize() override; 

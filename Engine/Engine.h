@@ -39,6 +39,9 @@
 #include "Audio/AudioSystem.h" 
 #include "Audio/AudioChannel.h" 
 
+// actors 
+#include "..\Game\Actors\Player.h"
+
 #include <vector>
 #include <memory>
 #include <algorithm>

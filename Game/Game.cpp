@@ -13,19 +13,20 @@ void Game::Initialize()
 
 	nc::SetFilePath("../Resources");
 
-	std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>());
+	//std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>()); // first guy
+	//std::shared_ptr<nc::Texture> player = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/playerShip.png", engine->Get<nc::Renderer>()); // player
 	particleTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine->Get<nc::Renderer>());
 
 	engine->Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
 	engine->Get<nc::AudioSystem>()->AddAudio("music", "audio/gameMusic.mp3");
 	musicChannel = engine->Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		nc::Transform transform{ {nc::RandomRangeInt(0, 800), nc::RandomRangeInt(0, 600)}, static_cast<float>(nc::RandomRangeInt(0, 360)), 1.0f };
-		std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(transform, texture);
-		scene->AddActor(std::move(actor));
-	}
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	nc::Transform transform{ {nc::RandomRangeInt(0, 800), nc::RandomRangeInt(0, 600)}, static_cast<float>(nc::RandomRangeInt(0, 360)), 1.0f };
+	//	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(transform, player);
+	//	scene->AddActor(std::move(actor));
+	//}
 
 	// get font from resource system
 	int size = 16;
@@ -60,6 +61,7 @@ void Game::Shutdown()
 
 void Game::Update()
 {
+	engine->Update();
 	stateTimer += engine->time.deltaTime; 
 
 	switch (state)
@@ -136,25 +138,26 @@ void Game::Update()
 	}
 	
 	// update
-	engine->Update();
-	scene->Update(engine->time.deltaTime);
-
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
 	{
 		quit = true;
 	}
 
-	if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
-	{
-		nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
-		engine->Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, particleTexture, 50.0f, nc::DegToRad(45), 10.0f);
-		engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
-		musicChannel.SetPitch(nc::RandomRange(0.2f, 2.0f));
-	}
+	//if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
+	//{
+	//	nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
+	//	engine->Get<nc::ParticleSystem>()->Create(position, 10, 2.0f, particleTexture, 50.0f, nc::DegToRad(45), 10.0f);
+	//	engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
+	//	musicChannel.SetPitch(nc::RandomRange(0.2f, 2.0f));
+	//}
+
+	scene->Update(engine->time.deltaTime);
 }
 
 void Game::Draw()
 {
+	engine->Get<nc::Renderer>()->BeginFrame();
+
 	switch (state)
 	{
 	case Game::eState::Title:
@@ -207,10 +210,8 @@ void Game::Draw()
 	}
 
 	// draw 
-	engine->Get<nc::Renderer>()->BeginFrame(); 
-
+	engine->Draw(engine->Get<nc::Renderer>());
 	scene->Draw(engine->Get<nc::Renderer>());
-	engine->Draw(engine->Get<nc::Renderer>());;
 
 	nc::Transform t;
 	t.position = { 30, 30 };
@@ -235,17 +236,18 @@ void Game::UpdateTitle(float dt)
 
 void Game::UpdateLevelOneStart(float dt)
 {
-	//scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("player.txt"), 300.0f));
-	//
+	nc::SetFilePath("../Resources/Art");
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("playerShip.png", engine->Get<nc::Renderer>()), 300.0f));
+	
 	//for (size_t i = 0; i < 2; i++)
 	//{
 	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy.txt"), 100.0f));
 	//}
 
 	//scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("asteroid.txt"), 25.0f));
-	//scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamemusic");
+	scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamemusic");
 
-	//state = eState::LevelOne;
+	state = eState::LevelOne;
 }
 
 void Game::UpdateLevelTwoStart(float dt)

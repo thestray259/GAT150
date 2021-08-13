@@ -39,7 +39,7 @@ namespace nc
 		}
 	}
 
-	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, const Color& color, float speed)
+	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, const std::shared_ptr<Texture> texture, float speed)
 	{
 		for (size_t i = 0; i < count; i++)
 		{
@@ -49,8 +49,8 @@ namespace nc
 				particle->isActive = true; 
 				particle->lifetime = lifetime; 
 				particle->position = position; 
-				particle->prevPosition = position; 
-				//particle->color = color; 
+				particle->prevPosition = position;
+				particle->texture = texture;
 				
 				particle->velocity = Vector2{ RandomRange(-1, 1), RandomRange(-1, 1) }  * (speed * Random());
 			}
