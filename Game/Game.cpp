@@ -93,34 +93,34 @@ void Game::Update()
 	case Game::eState::LevelOne:
 		//scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamemusic");
 
-		//if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
-		//{
-		//	state = eState::StartLevelTwo;
-		//}
+		if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
+		{
+			state = eState::StartLevelTwo;
+		}
 		break; 
 	case Game::eState::StartLevelTwo:
 		UpdateLevelTwoStart(engine->time.deltaTime);
 		break;
 	case Game::eState::LevelTwo:
-		//if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
-		//{
-		//	state = eState::StartLevelThree;
-		//}
+		if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
+		{
+			state = eState::StartLevelThree;
+		}
 		break;
 	case Game::eState::StartLevelThree:
 		UpdateLevelThreeStart(engine->time.deltaTime);
 		break;
 	case Game::eState::LevelThree:
-		//if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
-		//{
-		//	state = eState::GameWin;
-		//}
+		if ((scene->GetActors<Enemy>().size() == 0) && (scene->GetActors<Asteroid>().size() == 0))
+		{
+			state = eState::GameWin;
+		}
 		break;
 	case Game::eState::Game:
-		//if (scene->GetActors<Enemy>().size() == 0)
-		//{
-		//	state = eState::GameWin; 
-		//}
+		if (scene->GetActors<Enemy>().size() == 0)
+		{
+			state = eState::GameWin; 
+		}
 		break;
 	case Game::eState::GameWin:
 		//scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamewin");
@@ -128,10 +128,10 @@ void Game::Update()
 	case Game::eState::GameLose:
 		//scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamelose");
 
-		//if (scene->GetActors<Enemy>().size() > 0)
-		//{
-		//	scene->RemoveAllActors(); 
-		//}
+		if (scene->GetActors<Enemy>().size() > 0)
+		{
+			scene->RemoveAllActors(); 
+		}
 		break;
 	default:
 		break;
@@ -213,9 +213,9 @@ void Game::Draw()
 	engine->Draw(engine->Get<nc::Renderer>());
 	scene->Draw(engine->Get<nc::Renderer>());
 
-	nc::Transform t;
-	t.position = { 30, 30 };
-	engine->Get<nc::Renderer>()->Draw(textTexture, t);
+	//nc::Transform t;
+	//t.position = { 30, 30 };
+	//engine->Get<nc::Renderer>()->Draw(textTexture, t);
 
 	engine->Get<nc::Renderer>()->EndFrame(); 
 
@@ -239,12 +239,12 @@ void Game::UpdateLevelOneStart(float dt)
 	nc::SetFilePath("../Resources/Art");
 	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("playerShip.png", engine->Get<nc::Renderer>()), 300.0f));
 	
-	//for (size_t i = 0; i < 2; i++)
-	//{
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy.txt"), 100.0f));
-	//}
+	for (size_t i = 0; i < 2; i++)
+	{
+		scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("enemyShip1.png", engine->Get<nc::Renderer>()), 100.0f));
+	}
 
-	//scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("asteroid.txt"), 25.0f));
+	scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("asteroid1.png", engine->Get<nc::Renderer>()), 25.0f));
 	scene->engine->Get<nc::AudioSystem>()->PlayAudio("gamemusic");
 
 	state = eState::LevelOne;
@@ -252,39 +252,38 @@ void Game::UpdateLevelOneStart(float dt)
 
 void Game::UpdateLevelTwoStart(float dt)
 {
-	//for (size_t i = 0; i < 2; i++)
-	//{
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy.txt"), 100.0f));
-	//}
+	for (size_t i = 0; i < 2; i++)
+	{
+		scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("asteroid1.png", engine->Get<nc::Renderer>()), 25.0f));
+	}
 	//scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy2.txt"), 150.0f));
 
-	//for (size_t i = 0; i < 2; i++)
-	//{
-	//	scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("asteroid.txt"), 25.0f));
-	//}
+	for (size_t i = 0; i < 2; i++)
+	{
+		scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("asteroid1.png", engine->Get<nc::Renderer>()), 25.0f));
+	}
 
-	//state = eState::LevelTwo; 
+	state = eState::LevelTwo; 
 }
 
 void Game::UpdateLevelThreeStart(float dt)
 {
-	//for (size_t i = 0; i < 3; i++)
-	//{
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy.txt"), 100.0f));
-	//}
+	for (size_t i = 0; i < 3; i++)
+	{
+		scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("asteroid1.png", engine->Get<nc::Renderer>()), 25.0f));
+	}
 
 	//for (size_t i = 0; i < 2; i++)
 	//{
 	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("enemy2.txt"), 150.0f));
 	//}
 
-	//for (size_t i = 0; i < 3; i++)
-	//{
-	//	scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("asteroid.txt"), 25.0f));
+	for (size_t i = 0; i < 3; i++)
+	{
+		scene->AddActor(std::make_unique<Asteroid>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 800.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 3.0f }, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("asteroid1.png", engine->Get<nc::Renderer>()), 25.0f));
+	}
 
-	//}
-
-	//state = eState::LevelThree; 
+	state = eState::LevelThree; 
 }
 
 void Game::OnAddPoints(const nc::Event& event)

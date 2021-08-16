@@ -1,7 +1,7 @@
 #include "Player.h"
 //#include "Enemy.h"
 #include "Engine.h"
-//#include "Projectile.h"
+#include "Projectile.h"
 #include <memory>
 
 Player::Player(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed) : nc::Actor{ transform, texture }, speed{ speed } {}
@@ -68,9 +68,10 @@ void Player::Update(float dt)
 			nc::Transform t = children[1]->transform; 
 			t.scale = 0.5f; 
 
-			//std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("projectile.txt"), 800.0f);
-			//projectile->tag = "Player"; 
-			//scene->AddActor(std::move(projectile));
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
+			projectile->tag = "Player";
+			scene->AddActor(std::move(projectile));
 		}
 
 		{
@@ -79,9 +80,10 @@ void Player::Update(float dt)
 			nc::Transform t = children[2]->transform;
 			t.scale = 0.5f;
 
-			//std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("projectile.txt"), 800.0f);
-			//projectile->tag = "Player";
-			//scene->AddActor(std::move(projectile));
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
+			projectile->tag = "Player";
+			scene->AddActor(std::move(projectile));
 		}
 
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("playershoot");
@@ -96,14 +98,15 @@ void Player::Update(float dt)
 			nc::Transform t = transform;
 			t.scale = 0.5f;
 
-			//std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("bigProj.txt"), 400.0f);
-			//projectile->tag = "Player";
-			//scene->AddActor(std::move(projectile));
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/things_bronze.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
+			projectile->tag = "Player";
+			scene->AddActor(std::move(projectile));
 
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("playershoot");
 	}
 
-	std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); 
+	std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 	scene->engine->Get<nc::ParticleSystem>()->Create(children[0]->transform.position, 3, 2, particle, 50, children[0]->transform.rotation, nc::DegToRad(45)); 
 }
 

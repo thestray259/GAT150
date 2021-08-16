@@ -41,6 +41,8 @@
 
 // actors 
 #include "..\Game\Actors\Player.h"
+#include "..\Game\Actors\Enemy.h"
+#include "..\Game\Actors\Asteroid.h"
 
 #include <vector>
 #include <memory>
