@@ -32,7 +32,7 @@ namespace nc
 		}
 		else
 		{
-			std::shared_ptr resource = std::make_shared<T>(); // new Shape 
+			std::shared_ptr resource = std::make_shared<T>(); 
 			resource->Load(name, data); 
 			resources[string_tolower(name)] = resource; 
 

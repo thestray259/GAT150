@@ -40,9 +40,9 @@ void Enemy::Update(float dt)
 			std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 10}, {-5, -5} };
 
 			nc::Transform t = transform;
-			t.scale = 0.5f;
+			t.scale = 0.75f;
 
-			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/pill_red.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("pill_red.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 600.0f);
 			projectile->tag = "Enemy";
 			scene->AddActor(std::move(projectile));
@@ -59,7 +59,7 @@ void Enemy::OnCollision(Actor* actor)
 	{
 		destroy = true; 
 
-		std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+		std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("star_bronze.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 200, 1, particle, 50); 
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 

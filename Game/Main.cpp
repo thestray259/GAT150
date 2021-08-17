@@ -8,7 +8,7 @@ int main(int, char**)
 	bool quit = false; 
 	SDL_Event event; 
 
-	while (!quit)
+	while (!quit && !game.IsQuit())
 	{
 		SDL_PollEvent(&event); 
 		switch (event.type)
@@ -22,7 +22,6 @@ int main(int, char**)
 		game.Draw(); 
 	}
 
-	//IMG_Quit();
 	SDL_Quit();
 
 	return 0;

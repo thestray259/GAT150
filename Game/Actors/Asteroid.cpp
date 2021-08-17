@@ -21,7 +21,7 @@ void Asteroid::OnCollision(Actor* actor)
 	{
 		destroy = true;
 
-		std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+		std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("star_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 200, 1, particle, 50);
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 

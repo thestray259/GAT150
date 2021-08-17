@@ -1,5 +1,5 @@
 #include "Player.h"
-//#include "Enemy.h"
+#include "Enemy.h"
 #include "Engine.h"
 #include "Projectile.h"
 #include <memory>
@@ -23,18 +23,13 @@ void Player::Initialize()
 	locator = std::make_unique<Actor>();
 	locator->transform.localPosition = nc::Vector2{ 0, -5 };
 	AddChild(std::move(locator));
-
-	// child 3
-	//std::unique_ptr engine = std::make_unique<Actor>(nc::Transform{}, scene->engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("engine.txt"));
-	//engine->transform.localPosition = nc::Vector2{ 1, 0 };
-	//AddChild(std::move(engine));
 }
 
 void Player::Update(float dt)
 {
 	Actor::Update(dt); 
 
-	//children[3]->transform.localRotation += 5 * dt; 
+	//nc::SetFilePath("../Game/Build/Resources/Art");
 
 	// movement
 	float thrust = 0;
@@ -66,9 +61,9 @@ void Player::Update(float dt)
 			std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 10}, {-5, -5} };
 
 			nc::Transform t = children[1]->transform; 
-			t.scale = 0.5f; 
+			t.scale = 0.75f; 
 
-			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
 			projectile->tag = "Player";
 			scene->AddActor(std::move(projectile));
@@ -78,9 +73,9 @@ void Player::Update(float dt)
 			std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 10}, {-5, -5} };
 
 			nc::Transform t = children[2]->transform;
-			t.scale = 0.5f;
+			t.scale = 0.75f;
 
-			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("bold_silver.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
 			projectile->tag = "Player";
 			scene->AddActor(std::move(projectile));
@@ -96,9 +91,9 @@ void Player::Update(float dt)
 			std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 10}, {-5, -5} };
 
 			nc::Transform t = transform;
-			t.scale = 0.5f;
+			t.scale = 0.75f;
 
-			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/things_bronze.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+			std::shared_ptr<nc::Texture> proj = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("things_bronze.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
 			std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, proj, 400.0f);
 			projectile->tag = "Player";
 			scene->AddActor(std::move(projectile));
@@ -106,21 +101,22 @@ void Player::Update(float dt)
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("playershoot");
 	}
 
-	std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("../Resources/Art/start_gold.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
-	scene->engine->Get<nc::ParticleSystem>()->Create(children[0]->transform.position, 3, 2, particle, 50, children[0]->transform.rotation, nc::DegToRad(45)); 
+	std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("star_gold.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+	scene->engine->Get<nc::ParticleSystem>()->Create(children[0]->transform.position, 1, 2, particle, 50, children[0]->transform.rotation, nc::DegToRad(65)); 
 }
 
 void Player::OnCollision(Actor* actor)
 {
-	//if (dynamic_cast<Enemy*>(actor) || (dynamic_cast<Projectile*>(actor) && actor->tag == "Enemy"))
-	//{
-	//	destroy = true;
-	//	scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 200, 1, nc::Color::red, 50);
-	//	scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
+	if (dynamic_cast<Enemy*>(actor) || (dynamic_cast<Projectile*>(actor) && actor->tag == "Enemy"))
+	{
+		//destroy = true;
+		//std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("redPlayerHurt.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+		//scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 20, 2.0f, particle, 50.0f, nc::DegToRad(45), 10.0f);
+		//scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 
-	//	nc::Event event;
-	//	event.name = "PlayerDead";
-	//	event.data = std::string("yes I'm dead"); 
-	//	scene->engine->Get<nc::EventSystem>()->Notify(event);
-	//}
+		//nc::Event event;
+		//event.name = "PlayerDead";
+		//event.data = std::string("yes I'm dead"); 
+		//scene->engine->Get<nc::EventSystem>()->Notify(event);
+	}
 }

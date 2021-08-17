@@ -27,8 +27,9 @@ public:
 	void Update(); 
 	void Draw(); 
 
+	bool IsQuit() { return quit; }
+
 private: 
-	void UpdateTitle(float dt); 
 	void UpdateLevelOneStart(float dt); 
 	void UpdateLevelTwoStart(float dt); 
 	void UpdateLevelThreeStart(float dt); 
