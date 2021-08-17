@@ -109,14 +109,14 @@ void Player::OnCollision(Actor* actor)
 {
 	if (dynamic_cast<Enemy*>(actor) || (dynamic_cast<Projectile*>(actor) && actor->tag == "Enemy"))
 	{
-		//destroy = true;
-		//std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("redPlayerHurt.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
-		//scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 20, 2.0f, particle, 50.0f, nc::DegToRad(45), 10.0f);
-		//scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
+		destroy = true;
+		std::shared_ptr<nc::Texture> particle = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("redPlayerHurt.png", scene->engine->Get<nc::Renderer>()); // needs to be fixed 
+		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 20, 2.0f, particle, 50.0f, nc::DegToRad(45), 10.0f);
+		scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 
-		//nc::Event event;
-		//event.name = "PlayerDead";
-		//event.data = std::string("yes I'm dead"); 
-		//scene->engine->Get<nc::EventSystem>()->Notify(event);
+		nc::Event event;
+		event.name = "PlayerDead";
+		event.data = std::string("yes I'm dead"); 
+		scene->engine->Get<nc::EventSystem>()->Notify(event);
 	}
 }
