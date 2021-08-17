@@ -39,10 +39,9 @@
 #include "Audio/AudioSystem.h" 
 #include "Audio/AudioChannel.h" 
 
-// actors 
-#include "..\Game\Actors\Player.h"
-#include "..\Game\Actors\Enemy.h"
-#include "..\Game\Actors\Asteroid.h"
+// compnents 
+#include "Component/SpriteComponent.h"
+#include "Component/PhysicsComponent.h"
 
 #include <vector>
 #include <memory>
