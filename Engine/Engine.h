@@ -40,7 +40,7 @@
 #include "Audio/AudioChannel.h" 
 
 // compnents 
-#include "Component/SpriteComponent.h"
+#include "Component/SpriteAnimationComponent.h"
 #include "Component/PhysicsComponent.h"
 
 #include <vector>

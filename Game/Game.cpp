@@ -15,16 +15,22 @@ void Game::Initialize()
 	nc::SetFilePath("../Resources");
 
 	// actors 
-	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ {400, 300} }); 
+	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 }); 
 	{
-		std::unique_ptr<nc::SpriteComponent> component = std::make_unique<nc::SpriteComponent>(); 
-		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sf2.png", engine->Get<nc::Renderer>()); 
-		actor->AddComponent(std::move(component)); 
+		nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>(); 
+		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/character.png", engine->Get<nc::Renderer>()); 
 	}
 	{
-		std::unique_ptr<nc::PhysicsComponent> component = std::make_unique<nc::PhysicsComponent>();
-		component->ApplyForce(nc::Vector2::right * 200); 
-		actor->AddComponent(std::move(component)); 
+		nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>(); 
+		//component->ApplyForce(nc::Vector2::right * 200); 
+	}
+	{
+		nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
+		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sparkle.png", engine->Get<nc::Renderer>()); 
+		component->fps = 24; 
+		component->numFramesX = 8; 
+		component->numFramesY = 8; 
+
 	}
 	scene->AddActor(std::move(actor)); 
 }
