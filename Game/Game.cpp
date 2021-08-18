@@ -17,8 +17,8 @@ void Game::Initialize()
 	// actors 
 	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 }); 
 	{
-		nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>(); 
-		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/character.png", engine->Get<nc::Renderer>()); 
+		//nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>(); 
+		//component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/character.png", engine->Get<nc::Renderer>()); 
 	}
 	{
 		nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>(); 

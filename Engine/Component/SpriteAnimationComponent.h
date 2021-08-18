@@ -21,7 +21,5 @@ namespace nc
 		float frameTime = 0.0f; 
 
 		SDL_Rect rect; 
-
-		std::unique_ptr<nc::Engine> engine;
 	};
 }

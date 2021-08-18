@@ -4,9 +4,9 @@ namespace nc
 {
 	void SpriteAnimationComponent::Update()
 	{
-		frameTime = 1 / fps; 
+		frameTime = 1.0f / fps; 
 
-		frameTimer += engine->time.deltaTime; 
+		frameTimer += owner->scene->engine->time.deltaTime; 
 		if (frameTimer >= frameTime)
 		{
 			frameTimer = 0; 
