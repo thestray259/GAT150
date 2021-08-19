@@ -25,12 +25,13 @@ void Game::Initialize()
 		//component->ApplyForce(nc::Vector2::right * 200); 
 	}
 	{
-		nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
+		auto component = nc::ObjectFactory::Instance().Create<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
+		//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
 		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sparkle.png", engine->Get<nc::Renderer>()); 
 		component->fps = 24; 
 		component->numFramesX = 8; 
 		component->numFramesY = 8; 
-
+		actor->AddComponent(std::move(component));
 	}
 	scene->AddActor(std::move(actor)); 
 }

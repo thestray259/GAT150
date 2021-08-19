@@ -7,6 +7,11 @@
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 
+// framework
+#include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h" 
+
 // math
 #include "Math/Vector2.h"
 #include "Math/Color.h"
@@ -15,6 +20,10 @@
 #include "Math/Matrix22.h"
 #include "Math/Matrix33.h"
 #include "Math/Random.h"
+
+// audio 
+#include "Audio/AudioSystem.h" 
+#include "Audio/AudioChannel.h" 
 
 // graphics
 #include "Graphics/Renderer.h"
@@ -25,9 +34,6 @@
 // input 
 #include "Input/InputSystem.h"
 
-// framework
-#include "Framework/EventSystem.h"
-
 // resource
 #include "Resource/ResourceSystem.h"
 
@@ -35,9 +41,6 @@
 #include "Object/Actor.h"
 #include "Object/Scene.h"
 
-// audio 
-#include "Audio/AudioSystem.h" 
-#include "Audio/AudioChannel.h" 
 
 // compnents 
 #include "Component/SpriteAnimationComponent.h"
@@ -49,6 +52,8 @@
 
 namespace nc
 {
+	using ObjectFactory = Singleton<Factory<std::string, Object>>; 
+
 	class Engine
 	{
 	public:
