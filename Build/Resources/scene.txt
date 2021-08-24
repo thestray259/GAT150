@@ -1,0 +1,27 @@
+{
+   "actors":[
+      {
+         "type":"Actor",
+         "tag":"Player",
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "rotation":45
+         },
+         "components":[
+            {
+                "type":"SpriteAnimationComponent",
+                "textureName": "Art/sparkle.png",
+                "fps": 24,
+                "numFramesX": 8,
+                "numFramesY": 8
+            },
+            {
+                "type":"PhysicsComponent"
+            }
+         ]
+      }
+   ]
+}

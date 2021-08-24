@@ -14,26 +14,28 @@ void Game::Initialize()
 	nc::SeedRandom(static_cast<unsigned int>(time(nullptr))); 
 	nc::SetFilePath("../Resources");
 
-	// actors 
-	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 }); 
-	{
-		//nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>(); 
-		//component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/character.png", engine->Get<nc::Renderer>()); 
-	}
-	{
-		nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>(); 
-		//component->ApplyForce(nc::Vector2::right * 200); 
-	}
-	{
-		auto component = nc::ObjectFactory::Instance().Create<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
-		//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
-		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sparkle.png", engine->Get<nc::Renderer>()); 
-		component->fps = 24; 
-		component->numFramesX = 8; 
-		component->numFramesY = 8; 
-		actor->AddComponent(std::move(component));
-	}
-	scene->AddActor(std::move(actor)); 
+	rapidjson::Document document; 
+	bool success = nc::json::Load("scene.txt", document); 
+	assert(success); 
+
+	scene->Read(document); 
+
+	//// actors 
+	//std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 }); 
+	//{
+	//	nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>(); 
+	//	//component->ApplyForce(nc::Vector2::right * 200); 
+	//}
+	//{
+	//	auto component = nc::ObjectFactory::Instance().Create<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
+	//	//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
+	//	component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sparkle.png", engine->Get<nc::Renderer>()); 
+	//	component->fps = 24; 
+	//	component->numFramesX = 8; 
+	//	component->numFramesY = 8; 
+	//	actor->AddComponent(std::move(component));
+	//}
+	//scene->AddActor(std::move(actor)); 
 }
 
 void Game::Shutdown()
