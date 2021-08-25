@@ -8,9 +8,13 @@
                400,
                300
             ],
-            "rotation":45
+            "rotation":0
          },
          "components":[
+            {
+                "type":"PlayerComponent",
+                "speed":25
+            },
             {
                 "type":"SpriteAnimationComponent",
                 "textureName": "Art/sparkle.png",
@@ -19,7 +23,34 @@
                 "numFramesY": 8
             },
             {
-                "type":"PhysicsComponent"
+                "type":"RBPhysicsComponent",
+                "data.isDynamic":true,
+                "data.density":1,
+                "data.lockAngle":true,
+                "data.size": [64,64]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "tag":"Ground",
+         "transform":{
+            "position":[
+               400,
+               550
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+                "type":"SpriteComponent",
+                "textureName": "Art/ground.png"
+            },
+            {
+                "type":"RBPhysicsComponent",
+                "data.isDynamic":false,
+                "data.density":1,
+                "data.size": [800,20]
             }
          ]
       }
