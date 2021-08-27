@@ -22,10 +22,10 @@ namespace nc
 		virtual void Update(float dt);
 		virtual void Draw(Renderer* renderer);
 
-		virtual void OnCollision(Actor* actor) {}
-		void AddChild(std::unique_ptr<Actor> actor); 
+		void BeginContact(Actor* other); 
+		void EndContact(Actor* other); 
 
-		float GetRadius(); 
+		void AddChild(std::unique_ptr<Actor> actor); 
 		
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;

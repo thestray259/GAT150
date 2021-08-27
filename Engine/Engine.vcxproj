@@ -194,6 +194,7 @@
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Object\Actor.cpp" />
     <ClCompile Include="Object\Scene.cpp" />
+    <ClCompile Include="Physics\ContactListener.cpp" />
     <ClCompile Include="Physics\PhysicsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +231,7 @@
     <ClInclude Include="Object\Actor.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Object\Scene.h" />
+    <ClInclude Include="Physics\ContactListener.h" />
     <ClInclude Include="Physics\PhysicsSystem.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="Resource\ResourceSystem.h" />

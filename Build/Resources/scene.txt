@@ -24,7 +24,28 @@
                 "numFramesX": 18,
                 "numFramesY": 11,
                 "startFrame":90,
-                "endFrame":95
+                "endFrame":95,
+                "sequences": [
+                    {
+                        "name":"idle",
+                        "sequence.fps":2,
+                        "sequence.startFrame":0,
+                        "sequence.endFrame":1
+                    },
+                    {
+                        "name":"walk_right",
+                        "sequence.fps":10,
+                        "sequence.startFrame":90,
+                        "sequence.endFrame":95
+                    },
+                    {
+                        "name":"walk_left",
+                        "sequence.fps":10,
+                        "sequence.startFrame":162,
+                        "sequence.endFrame":167
+                    }
+                ],
+                "defaultSequence":"idle"
             },
             {
                 "type":"RBPhysicsComponent",
