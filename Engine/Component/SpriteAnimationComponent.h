@@ -23,6 +23,9 @@ namespace nc
 		float frameTimer = 0.0f; 
 		float frameTime = 0.0f; 
 
+		int startFrame = 0; 
+		int endFrame = 0; 
+
 		SDL_Rect rect; 
 
 	};

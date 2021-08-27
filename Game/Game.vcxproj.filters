@@ -23,12 +23,30 @@
     <ClCompile Include="GameComponent\PlayerComponent.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponent\EnemyComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent\AudioComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent\TextComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameComponent\PlayerComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent\EnemyComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent\AudioComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent\TextComponent.h">
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>

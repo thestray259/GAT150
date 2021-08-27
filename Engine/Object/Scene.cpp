@@ -97,4 +97,14 @@ namespace nc
 		return true;
 	}
 
+	Actor* Scene::FindActor(const std::string name)
+	{
+		for (auto& actor : actors)
+		{
+			if (actor->name == name) return actor.get();
+		}
+
+		return nullptr;
+	}
+
 }
