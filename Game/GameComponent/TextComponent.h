@@ -8,6 +8,8 @@ class Font;
 class TextComponent : public nc::GraphicsComponent
 {
 public: 
+	std::unique_ptr<Object> Clone() const { return std::make_unique<TextComponent>(*this); }
+
 	virtual void Update() override;
 	virtual void Draw(nc::Renderer* renderer) override;
 

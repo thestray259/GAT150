@@ -5,6 +5,10 @@
 class PlayerComponent : public nc::Component
 {
 public: 
+	virtual ~PlayerComponent();
+
+	std::unique_ptr<Object> Clone() const { return std::make_unique<PlayerComponent>(*this); }
+
 	void Create() override; 
 	virtual void Update() override;
 

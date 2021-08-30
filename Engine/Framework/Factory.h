@@ -21,6 +21,20 @@ namespace nc
 		}
 	};
 
+	template <class TBase>
+	class Prototype : public CreatorBase<TBase>
+	{
+	public:
+		Prototype(std::unique_ptr<TBase> instance) : instance{ std::move(instance) } {}
+		std::unique_ptr<TBase> Create() const override
+		{
+			return instance->Clone(); 
+		}
+
+	private: 
+		std::unique_ptr<TBase> instance; 
+	};
+
 	template<class TKey, class TBase>
 	class Factory
 	{
@@ -30,6 +44,8 @@ namespace nc
 
 		template<class T>
 		void Register(TKey key); 
+		template<class T>
+		void RegisterPrototype(TKey key, std::unique_ptr<TBase> instance);
 
 	protected: 
 		std::map < TKey, std::unique_ptr<CreatorBase<TBase>>> registery;
@@ -53,5 +69,12 @@ namespace nc
 	inline void Factory<TKey, TBase>::Register(TKey key)
 	{
 		registery[key] = std::make_unique<Creator<T, TBase>>(); 
+	}
+
+	template<class TKey, class TBase>
+	template<class T>
+	inline void Factory<TKey, TBase>::RegisterPrototype(TKey key, std::unique_ptr<TBase> instance)
+	{
+		registery[key] = std::make_unique<Prototype<TBase>>(std::move(instance)); 
 	}
 }

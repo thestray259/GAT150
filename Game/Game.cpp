@@ -32,22 +32,12 @@ void Game::Initialize()
 
 	scene->Read(document); 
 
-	//// actors 
-	//std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 }); 
-	//{
-	//	nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>(); 
-	//	//component->ApplyForce(nc::Vector2::right * 200); 
-	//}
-	//{
-	//	auto component = nc::ObjectFactory::Instance().Create<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
-	//	//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>(); 
-	//	component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Art/sparkle.png", engine->Get<nc::Renderer>()); 
-	//	component->fps = 24; 
-	//	component->numFramesX = 8; 
-	//	component->numFramesY = 8; 
-	//	actor->AddComponent(std::move(component));
-	//}
-	//scene->AddActor(std::move(actor)); 
+	for (int i = 0; i < 10; i++)
+	{
+		auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin"); 
+		actor->transform.position = nc::Vector2{ nc::RandomRange(0, 800), nc::RandomRange(300, 550) }; 
+		scene->AddActor(std::move(actor)); 
+	}
 }
 
 void Game::Shutdown()

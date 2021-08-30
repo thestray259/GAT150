@@ -145,6 +145,7 @@
 		},
               		{
 			"type":"Actor",
+            "prototype":true,
 			"name":"Coin",
 			"transform":{
 				"position":[
@@ -166,6 +167,7 @@
                 {
                 "type":"RBPhysicsComponent",
                 "data.isDynamic":false,
+                "data.isSensor":true,
                 "data.density":1
             }
 			]
