@@ -3,6 +3,7 @@
 #include "GameComponent/EnemyComponent.h"
 #include "GameComponent/AudioComponent.h"
 #include "GameComponent/TextComponent.h"
+#include "GameComponent/PickupComponent.h"
 
 void Game::Initialize()
 {
@@ -16,6 +17,7 @@ void Game::Initialize()
 	REGISTER_CLASS(EnemyComponent); 
 	REGISTER_CLASS(AudioComponent); 
 	REGISTER_CLASS(TextComponent); 
+	REGISTER_CLASS(PickupComponent); 
 
 	// create scene
 	scene = std::make_unique<nc::Scene>(); 

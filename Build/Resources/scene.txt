@@ -142,6 +142,33 @@
 					"text":"Hello World!"
 				}
 			]
+		},
+              		{
+			"type":"Actor",
+			"name":"Coin",
+			"transform":{
+				"position":[
+					500,
+					500
+				]
+			},
+			"components":[
+				{
+					"type":"PickupComponent"
+				},
+                {
+                    "type":"SpriteAnimationComponent",
+                    "textureName":"Art/coin.png",
+                    "fps":10,
+                    "numFramesX":8,
+                    "numFramesY":1
+                },     
+                {
+                "type":"RBPhysicsComponent",
+                "data.isDynamic":false,
+                "data.density":1
+            }
+			]
 		}
    ]
 }

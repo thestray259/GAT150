@@ -59,8 +59,6 @@ void PlayerComponent::OnCollisionEnter(const Event& event)
 	{
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt"); 
 	}
-
-	//std::cout << actor->tag << std::endl; 
 }
 
 void PlayerComponent::OnCollisionExit(const Event& event)

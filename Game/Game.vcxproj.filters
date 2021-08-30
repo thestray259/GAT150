@@ -32,6 +32,9 @@
     <ClCompile Include="GameComponent\TextComponent.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponent\PickupComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -47,6 +50,9 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="GameComponent\TextComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent\PickupComponent.h">
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>
