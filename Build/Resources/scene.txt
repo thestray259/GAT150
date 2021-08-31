@@ -15,7 +15,7 @@
          "components":[
             {
                 "type":"PlayerComponent",
-                "speed":10
+                "speed":15
             },
             {
                 "type":"SpriteAnimationComponent",
@@ -50,16 +50,16 @@
             {
                 "type":"RBPhysicsComponent",
                 "data.isDynamic":true,
-                "data.density":1,
+                "data.density":0.5,
                 "data.lockAngle":true,
                 "data.restitution":0.1,
                 "data.gravityScale":1,
-                "data.size": [32,32]
+                "data.size": [32,64]
             },
             {
     	        "type":"AudioComponent",
 	            "soundName":"Audio/grunt.wav",
-        	    "playOnAwake":true
+        	    "playOnAwake":false
             }
          ]
       },
@@ -120,6 +120,56 @@
             }
          ]
       },
+      {
+         "type":"Actor",
+         "name":"tile01",
+         "tag":"Ground",
+         "prototype": true, 
+         "transform":{
+            "scale":[
+               2,
+               2
+            ]
+         },
+         "components":[
+            {
+                "type":"SpriteComponent",
+                "textureName": "Art/tileset2_32x32.png",
+                "rect":[416, 128, 32, 32]
+            },
+            {
+                "type":"RBPhysicsComponent",
+                "data.isDynamic":false,
+                "data.density":1,
+                "data.size": [64,64]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "name":"tile02",
+         "tag":"Ground",
+         "prototype": true, 
+         "transform":{
+            "scale":[
+               2,
+               2
+            ]
+         },
+         "components":[
+            {
+                "type":"SpriteComponent",
+                "textureName": "Art/tileset2_32x32.png",
+                "rect":[64, 0, 32, 32]
+            },
+            {
+                "type":"RBPhysicsComponent",
+                "data.isDynamic":false,
+                "data.density":1,
+                "data.size": [64,64]
+            }
+         ]
+      },
       		{
 			"type":"Actor",
 			"name":"Score",
@@ -169,7 +219,7 @@
                 "data.isDynamic":false,
                 "data.isSensor":true,
                 "data.density":1
-            }
+                }
 			]
 		}
    ]

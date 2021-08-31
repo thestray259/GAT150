@@ -45,7 +45,7 @@
 // objects 
 #include "Object/Actor.h"
 #include "Object/Scene.h"
-
+#include "Object/TileMap.h"
 
 // compnents 
 #include "Component/SpriteAnimationComponent.h"

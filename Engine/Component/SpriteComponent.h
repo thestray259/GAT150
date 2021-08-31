@@ -18,6 +18,8 @@ namespace nc
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public: 
+		SDL_Rect rect;
+
 		std::shared_ptr<Texture> texture; 
 
 	};
