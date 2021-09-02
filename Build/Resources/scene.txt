@@ -74,7 +74,9 @@
                 "textureName": "Art/bat.png",
                 "fps": 10,
                 "numFramesX": 4,
-                "numFramesY": 1
+                "numFramesY": 1,
+                "startFrame": 1,
+                "endFrame": 3
             },
             {
                 "type":"RBPhysicsComponent",
@@ -106,7 +108,9 @@
                 "textureName": "Art/bat.png",
                 "fps": 10,
                 "numFramesX": 4,
-                "numFramesY": 1
+                "numFramesY": 1,
+                "startFrame": 1,
+                "endFrame": 3
             },
             {
                 "type":"RBPhysicsComponent",

@@ -1,7 +1,7 @@
 #pragma once
 #include "Component/Component.h"
 #include "Framework/EventSystem.h"
-#include "ProjectileComponent.h"
+//#include "ProjectileComponent.h"
 
 class PlayerComponent : public nc::Component
 {

@@ -51,7 +51,6 @@ void Game::Update()
 		quit = true;
 	}
 
-
 	switch (state)
 	{
 	case Game::eState::Reset:
@@ -226,16 +225,14 @@ void Game::PlayerDead()
 
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
 	{
-		//auto title = scene->FindActor("PlayerDead");
-		//title->active = false;
-		//assert(title);
-
 		state = eState::Reset;
 	}
 }
 
 void Game::GameOver()
 {
+	scene->RemoveAllActors();
+
 	rapidjson::Document document;
 	bool success = nc::json::Load("gamewin.txt", document);
 	assert(success);
@@ -243,10 +240,6 @@ void Game::GameOver()
 
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
 	{
-		//auto title = scene->FindActor("GameOver");
-		//title->active = false;
-		//assert(title);
-
 		state = eState::Reset;
 	}
 }
