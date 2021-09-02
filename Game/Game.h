@@ -8,6 +8,7 @@ public:
 	{
 		Reset, 
 		Title, 
+		Controls,
 		StartGame, 
 		StartLevel, 
 		Level, 
@@ -27,6 +28,7 @@ public:
 private: 
 	void Reset(); 
 	void Title();
+	void Controls();
 	void StartGame();
 	void StartLevel();
 	void Level();

@@ -252,5 +252,8 @@
     <Text Include="..\Build\Resources\gamewin.txt">
       <Filter>Resources</Filter>
     </Text>
+    <Text Include="..\Build\Resources\controls.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

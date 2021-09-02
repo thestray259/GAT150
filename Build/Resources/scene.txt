@@ -52,11 +52,6 @@
                 "data.restitution":0.1,
                 "data.gravityScale":1,
                 "data.size": [32,62]
-            },
-            {
-    	        "type":"AudioComponent",
-	            "soundName":"Audio/grunt.wav",
-        	    "playOnAwake":false
             }
          ]
       },

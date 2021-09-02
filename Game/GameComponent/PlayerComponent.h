@@ -1,6 +1,7 @@
 #pragma once
 #include "Component/Component.h"
 #include "Framework/EventSystem.h"
+#include "ProjectileComponent.h"
 
 class PlayerComponent : public nc::Component
 {
@@ -21,6 +22,8 @@ public:
 public: 
 	float speed = 0; 
 	float jump = 0; 
+	float fireTimer{ 0 };
+	float fireRate{ 0.2f };
 
 private: 
 	std::list<nc::Actor*> contacts; 

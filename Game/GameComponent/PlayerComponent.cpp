@@ -92,6 +92,8 @@ bool PlayerComponent::Read(const rapidjson::Value& value)
 {
 	JSON_READ(value, speed); 
 	JSON_READ(value, jump); 
+	JSON_READ(value, fireRate); 
+	JSON_READ(value, fireTimer); 
 
 	return true;
 }

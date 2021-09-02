@@ -29,7 +29,9 @@ void Game::Initialize()
 	// events 
 	engine->Get<nc::EventSystem>()->Subscribe("add_score", std::bind(&Game::OnAddScore, this, std::placeholders::_1)); 
 	engine->Get<nc::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead, this, std::placeholders::_1)); 
-	// player death 
+
+	// audio 
+	scene->engine->Get<nc::AudioSystem>()->AddAudio("music", "Audio/music.mp3");
 }
 
 void Game::Shutdown()
@@ -55,6 +57,9 @@ void Game::Update()
 		break;
 	case Game::eState::Title:
 		Title(); 
+		break;
+	case Game::eState::Controls:
+		Controls();
 		break;
 	case Game::eState::StartGame:
 		StartGame(); 
@@ -106,6 +111,8 @@ void Game::Reset()
 	assert(success);
 	scene->Read(document);
 
+	scene->engine->Get<nc::AudioSystem>()->PlayAudio("music");
+
 	state = eState::Title; 
 }
 
@@ -118,6 +125,32 @@ void Game::Title()
 		assert(title); 
 
 		state = eState::StartGame;
+	}
+
+	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_TAB) == nc::InputSystem::eKeyState::Pressed)
+	{
+		auto title = scene->FindActor("Title");
+		title->active = false;
+		assert(title);
+
+		state = eState::Controls;
+	}
+}
+
+void Game::Controls()
+{
+	rapidjson::Document document;
+	bool success = nc::json::Load("controls.txt", document);
+	assert(success);
+	scene->Read(document);
+
+	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_TAB) == nc::InputSystem::eKeyState::Pressed)
+	{
+		auto title = scene->FindActor("Controls");
+		title->active = false;
+		assert(title);
+
+		state = eState::Reset;
 	}
 }
 

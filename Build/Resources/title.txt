@@ -35,7 +35,7 @@
 						0,
 						0
 					],
-					"text":"0000"
+					"text":"0"
 				}
 			]
 		},
@@ -44,21 +44,67 @@
 			"name":"Title",
 			"transform":{
 				"position":[
-					380,
-					300
+					400,
+					250
 				]
 			},
 			"components":[
 				{
 					"type":"TextComponent",
 					"fontName":"Fonts/Techtro.ttf",
-					"fontSize":16,
+					"fontSize":24,
 					"color":[
 						0,
 						0,
 						0
 					],
 					"text":"Title Here"
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"name":"Title",
+			"transform":{
+				"position":[
+					400,
+					350
+				]
+			},
+			"components":[
+				{
+					"type":"TextComponent",
+					"fontName":"Fonts/Techtro.ttf",
+					"fontSize":24,
+					"color":[
+						0,
+						0,
+						0
+					],
+					"text":"Press Space To Start"
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"name":"Title",
+			"transform":{
+				"position":[
+					400,
+					400
+				]
+			},
+			"components":[
+				{
+					"type":"TextComponent",
+					"fontName":"Fonts/Techtro.ttf",
+					"fontSize":24,
+					"color":[
+						0,
+						0,
+						0
+					],
+					"text":"Press Tab For Controls"
 				}
 			]
 		}
