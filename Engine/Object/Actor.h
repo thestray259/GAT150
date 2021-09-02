@@ -41,6 +41,7 @@ namespace nc
 		T* GetComponent();
 
 	public:
+		bool active{ true };
 		bool destroy{ false }; 
 		std::string name; 
 		std::string tag; 

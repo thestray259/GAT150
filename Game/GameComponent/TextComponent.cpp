@@ -29,7 +29,7 @@ bool TextComponent::Read(const rapidjson::Value& value)
 	JSON_READ(value, text); 
 
 	font = owner->scene->engine->Get<ResourceSystem>()->Get<nc::Font>(fontName, &fontSize); 
-	texture = owner->scene->engine->Get<ResourceSystem>()->Get<nc::Texture>("texture", owner->scene->engine->Get<Renderer>()); 
+	texture = owner->scene->engine->Get<ResourceSystem>()->Get<nc::Texture>(unique_string("texture"), owner->scene->engine->Get<Renderer>());
 
 	SetText(text); 
 
