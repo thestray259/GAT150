@@ -32,6 +32,8 @@ void Game::Initialize()
 
 	// audio 
 	scene->engine->Get<nc::AudioSystem>()->AddAudio("music", "Audio/music.mp3");
+	music = scene->engine->Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
+
 }
 
 void Game::Shutdown()
@@ -111,8 +113,6 @@ void Game::Reset()
 	assert(success);
 	scene->Read(document);
 
-	scene->engine->Get<nc::AudioSystem>()->PlayAudio("music");
-
 	state = eState::Title; 
 }
 
@@ -120,9 +120,17 @@ void Game::Title()
 {
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
 	{
-		auto title = scene->FindActor("Title"); 
-		title->active = false; 
-		assert(title); 
+		auto title = scene->FindActor("Title");
+		title->active = false;
+		assert(title);
+
+		title = scene->FindActor("TitleB");
+		title->active = false;
+		assert(title);
+
+		title = scene->FindActor("TitleC");
+		title->active = false;
+		assert(title);
 
 		state = eState::StartGame;
 	}

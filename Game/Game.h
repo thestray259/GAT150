@@ -45,6 +45,8 @@ public:
 private: 
 	bool quit = false;
 
+	nc::AudioChannel music;
+
 	eState state = eState::Reset; 
 	int score = 0; 
 	float stateTimer = 0; 

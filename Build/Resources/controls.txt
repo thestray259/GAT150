@@ -51,12 +51,12 @@
 			"components":[
 				{
 					"type":"TextComponent",
-					"fontName":"Fonts/Techtro.ttf",
+					"fontName":"Fonts/Bigger.ttf",
 					"fontSize":24,
 					"color":[
+						0.5,
 						0,
-						0,
-						0
+						1
 					],
 					"text":"Controls!"
 				}
@@ -192,9 +192,9 @@
 					"fontName":"Fonts/Techtro.ttf",
 					"fontSize":24,
 					"color":[
+						0.5,
 						0,
-						0,
-						0
+						1
 					],
 					"text":"Press Tab To Return"
 				}
