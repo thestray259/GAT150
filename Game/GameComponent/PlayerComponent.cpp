@@ -64,6 +64,11 @@ void PlayerComponent::OnCollisionEnter(const Event& event)
 	if (istring_compare(actor->tag, "Enemy"))
 	{
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt"); 
+
+		nc::Event event;
+		event.name = "PlayerDead";
+		event.data = std::string("yes I'm dead");
+		owner->scene->engine->Get<nc::EventSystem>()->Notify(event);
 	}
 }
 

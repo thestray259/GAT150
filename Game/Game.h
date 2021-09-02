@@ -34,6 +34,7 @@ private:
 	void GameOver(); 
 
 	void OnAddScore(const nc::Event& event); 
+	void OnPlayerDead(const nc::Event& event); 
 
 public: 
 	std::unique_ptr<nc::Engine> engine; 

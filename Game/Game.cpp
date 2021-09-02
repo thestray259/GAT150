@@ -28,6 +28,7 @@ void Game::Initialize()
 
 	// events 
 	engine->Get<nc::EventSystem>()->Subscribe("add_score", std::bind(&Game::OnAddScore, this, std::placeholders::_1)); 
+	engine->Get<nc::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead, this, std::placeholders::_1)); 
 	// player death 
 }
 
@@ -98,6 +99,8 @@ void Game::Reset()
 {
 	scene->RemoveAllActors(); 
 
+	score = 0; 
+
 	rapidjson::Document document;
 	bool success = nc::json::Load("title.txt", document);
 	assert(success);
@@ -161,17 +164,59 @@ void Game::Level()
 		coin->transform.position = nc::Vector2{ nc::RandomRange(100, 700), 100.0f };
 		scene->AddActor(std::move(coin));
 	}
+
+	if (score >= 100)
+	{
+		state = eState::GameOver; 
+	}
 }
 
 void Game::PlayerDead()
 {
+	rapidjson::Document document;
+	bool success = nc::json::Load("dead.txt", document);
+	assert(success);
+	scene->Read(document);
+
+	if (scene->GetActors<nc::Actor>().size() > 0)
+	{
+		scene->RemoveAllActors(); 
+	}
+
+	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
+	{
+		//auto title = scene->FindActor("PlayerDead");
+		//title->active = false;
+		//assert(title);
+
+		state = eState::Reset;
+	}
 }
 
 void Game::GameOver()
 {
+	rapidjson::Document document;
+	bool success = nc::json::Load("gamewin.txt", document);
+	assert(success);
+	scene->Read(document);
+
+	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
+	{
+		//auto title = scene->FindActor("GameOver");
+		//title->active = false;
+		//assert(title);
+
+		state = eState::Reset;
+	}
 }
 
 void Game::OnAddScore(const nc::Event& event)
 {
 	score += std::get<int>(event.data); 
+}
+
+void Game::OnPlayerDead(const nc::Event& event)
+{
+	std::cout << std::get<std::string>(event.data) << std::endl;
+	state = eState::PlayerDead; 
 }

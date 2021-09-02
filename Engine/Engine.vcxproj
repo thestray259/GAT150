@@ -239,6 +239,8 @@
     <ClInclude Include="Resource\ResourceSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\Build\Resources\dead.txt" />
+    <Text Include="..\Build\Resources\gamewin.txt" />
     <Text Include="..\Build\Resources\map.txt" />
     <Text Include="..\Build\Resources\scene.txt" />
     <Text Include="..\Build\Resources\title.txt" />

@@ -26,20 +26,20 @@
                     {
                         "name":"idle",
                         "sequence.fps":2,
-                        "sequence.startFrame":0,
-                        "sequence.endFrame":1
+                        "sequence.startFrame":6,
+                        "sequence.endFrame":7
                     },
                     {
                         "name":"walk_right",
                         "sequence.fps":10,
-                        "sequence.startFrame":90,
-                        "sequence.endFrame":95
+                        "sequence.startFrame":96,
+                        "sequence.endFrame":100
                     },
                     {
                         "name":"walk_left",
                         "sequence.fps":10,
-                        "sequence.startFrame":162,
-                        "sequence.endFrame":167
+                        "sequence.startFrame":169,
+                        "sequence.endFrame":173
                     }
                 ],
                 "defaultSequence":"idle"
@@ -66,7 +66,7 @@
          "transform":{
             "position":[
                500,
-               200
+               450
             ]
          },
          "components":[
